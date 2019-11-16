@@ -3,7 +3,7 @@ import sys
 import os
 
 if len(sys.argv) < 2:
-    print 'Usage: input'
+    print('Usage: input')
     exit(-1)
 
 
