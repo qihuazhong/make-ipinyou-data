@@ -1,10 +1,17 @@
+
+forked from [wnzhang/make-ipinyou-data](https://github.com/wnzhang/make-ipinyou-data)
+
+Changes:
+- Adapted the code to python3
+- Only process season 3 data
+- Minor correction the data description
+
 make-ipinyou-data
 =================
 
 This project is to formalise the iPinYou RTB data into a standard format for further researches.
 
 ### Step 0
-~~Go to [data.computational-advertising.org](http://data.computational-advertising.org) to download `ipinyou.contest.dataset.zip`.~~
 
 The raw data of iPinYou (`ipinyou.contest.dataset.zip`) can be downloaded from [Dropbox](https://www.dropbox.com/s/txz0ms0axqf7jrl/ipinyou.contest.dataset.7z?dl=0).
 
@@ -27,6 +34,8 @@ You do not need to further unzip the packages in the subfolders.
 
 ### Step 2
 Under `make-ipinyou-data` folder, just run `make all`.
+
+> :warning: This version of makefile only process season 3 data (2261, 2259, 2821 and 2993)
 
 After the program finished, the total size of the folder will be 14G. The files under `make-ipinyou-data` should be like this:
 ```
