@@ -6,6 +6,44 @@ Changes:
 - Only process season 3 data
 - Minor correction the data description
 
+## Troubleshooting:
+
+External solvers are needed [(link)](https://yalmip.github.io/allsolvers/) to solve the SDP on YALMIP. Here are steps to install [MOSEK](https://www.mosek.com) (this solver is academic-free but licences are required).
+### Step 1: download the solver
+Please use the more preferred way for General setup:
+
+link: https://www.mosek.com/downloads/
+### Step 2: license
+Apply for [Personal Academic License](https://www.mosek.com/products/academic-licenses/). An email will be sent to your mailbox with license attached within 1 minute.
+
+The license should be put inside a folder called "mosek" under the user's home directory. Specifically,
+
+Windows:
+
+```c:\users\_userid_\mosek\mosek.lic```
+
+Unix/OS X:
+
+```/home/_userid_/mosek/mosek.lic```
+
+Where _userid_ is your User ID on the computer.
+### Step 3: install the solver 
+unpack it into a chosen directory, this path recommended: 
+
+```/home/_userid_/mosek/~```
+
+Run the command
+
+```python <MSKHOME>/mosek/9.1/tools/platform/osx64x86/bin/install.py```
+### Step 4: toolbox installation on Matlab 
+add path:
+
+```addpath ~/mosek/9.1/toolbox/r2015a```
+
+set the solver:
+
+```ops = sdpsettings('solver','mosek','verbose',1,'debug',1)```
+
 make-ipinyou-data
 =================
 
