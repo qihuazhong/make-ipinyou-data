@@ -6,13 +6,13 @@ function TestAdCampaign
 %https://yalmip.github.io/
 
 n = 3;
-abar = [0.86 0.39 0.37]';
+abar = [0.86 0.39 0.38]';
 cs = 18525*ones(n,1);
 ds = 15257*ones(n,1);
 ps = ones(n,1);
-B = 1e5;
+B = 1e7;
 rho = -1;
-ahat = [0.54 0.11 0.08].*abar';
+ahat = ([0.54 0.11 0.08].*abar')';
 Gamma = 1;
 
 x0 = B/n*ones(n,1); 
