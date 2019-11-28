@@ -14,14 +14,14 @@ h_save = zeros(n,iter)
 for i = 1:iter
     %z = get_z(n);
     z = rand(n, 1);
-    a = abar.*(1 - ahat .* z);
+    a = abar - ahat.* z;
     h_save(:,i) = cs.*(1+boxSol.x./ds).^a - cs;
     %h = cs.*(1+boxSol.x./ds).^a - cs;
     %h_save(i) = cs.*(1+nomSol.x./ds).^a - cs;
 end
 
 sum_h = sum(h_save);
-hist(sum_h);
+hist(sum_h, 50);
 %boxplot(h_save');
 
 % define the uncertainty
