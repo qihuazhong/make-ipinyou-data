@@ -5,15 +5,17 @@ function TestAdCampaign
 %This file requires YALMIP to be installed
 %https://yalmip.github.io/
 
-n = 3;
-abar = [0.86 0.39 0.38]';
-cs = 18525*ones(n,1);
-ds = 15257*ones(n,1);
+n = 4;
+abar = [0.608 0.386 0.430 0.864]';
+cs = [8552.695 7195.047 6045.412 4381.518]';
+ds = [10000 5314.612 10000 10000]';
 ps = ones(n,1);
-B = 1e7;
+B = 1e6;
 rho = -1;
-ahat = ([0.54 0.11 0.08].*abar')';
+ahat = [0.257 0.114 0.127 0.329]';
 Gamma = 1;
+Gamma_k = 1;
+
 
 x0 = B/n*ones(n,1); 
 
@@ -26,7 +28,7 @@ nomSol.x = x; nomSol.fval = fval;
 boxSol.x = x; boxSol.fval = fval;
 
 %robust robust formulation under Budgeted uncertainty set
-[fval,x] = solveRobustProbBudgetSet(abar,ahat,Gamma,cs,ds,ps,B,[]);
+[fval,x] = solveRobustProbBudgetSet(abar,ahat,Gamma_k,cs,ds,ps,B,[]);
 budgetSol.x = x; budgetSol.fval = fval;
 
 %evaluate nominal values
@@ -35,16 +37,16 @@ boxSol.nomVal = solveNominalProb(abar,cs,ds,ps,B,boxSol.x);
 budgetSol.nomVal = solveNominalProb(abar,cs,ds,ps,B,budgetSol.x);
 
 %evaluate robust values under budgeted uncertainty set
-nomSol.wcVal = solveRobustProbBudgetSet(abar,ahat,Gamma,cs,ds,ps,B,nomSol.x)
-boxSol.wcVal = solveRobustProbBudgetSet(abar,ahat,Gamma,cs,ds,ps,B,boxSol.x)
-budgetSol.wcVal = budgetSol.fval;
+%nomSol.wcVal = solveRobustProbBudgetSet(abar,ahat,Gamma_k,cs,ds,ps,B,nomSol.x)
+%boxSol.wcVal = solveRobustProbBudgetSet(abar,ahat,Gamma_k,cs,ds,ps,B,boxSol.x)
+%budgetSol.wcVal = budgetSol.fval;
 
 display('These are the three solutions founds : "nominal"  "robust with box" "robust with budget"');
-[nomSol.x boxSol.x budgetSol.x]
+[nomSol.x boxSol.x budgetSol.x]'
 
-display(sprintf('The nominal solution predicts a profit of %0.3f, its nominal profit is %0.3f, its worst-case profit is %0.3f',nomSol.fval,nomSol.nomVal,nomSol.wcVal));
-display(sprintf('The robust with box solution predicts a profit of %0.3f, its nominal profit is %0.3f, its worst-case profit is %0.3f',boxSol.fval,boxSol.nomVal,boxSol.wcVal));
-display(sprintf('The robust with budget solution predicts a profit of %0.3f, its nominal profit is %0.3f, its worst-case profit is %0.3f',budgetSol.fval,budgetSol.nomVal,budgetSol.wcVal));
+display(sprintf('The nominal solution predicts a profit of %0.3f, its nominal profit is %0.3f, its worst-case profit is %0.3f',nomSol.fval,nomSol.nomVal)); %,nomSol.wcVal
+display(sprintf('The robust with box solution predicts a profit of %0.3f, its nominal profit is %0.3f, its worst-case profit is %0.3f',boxSol.fval,boxSol.nomVal));%,boxSol.wcVal
+display(sprintf('The robust with budget solution predicts a profit of %0.3f, its nominal profit is %0.3f, its worst-case profit is %0.3f',budgetSol.fval,budgetSol.nomVal));%,budgetSol.wcVal
 
 return
 
